@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Group Food Order</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+        .restaurant-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .restaurant-btn {
+            padding: 20px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .restaurant-btn:hover {
+            background: #e0e0e0;
+        }
+        .chat-iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Choose a Restaurant</h1>
+    
+    <!-- Restaurant Buttons -->
+    <div class="restaurant-grid">
+        <button class="restaurant-btn" onclick="openChat('pizza-hut')">
+            🍕 Pizza Hut
+        </button>
+        <button class="restaurant-btn" onclick="openChat('dominos')">
+            🍕 Domino's
+        </button>
+        <button class="restaurant-btn" onclick="openChat('burger-king')">
+            🍔 Burger King
+        </button>
+        <button class="restaurant-btn" onclick="openChat('mcdonalds')">
+            🍟 McDonald's
+        </button>
+    </div>
+
+    <!-- Chat Container (hidden by default) -->
+    <div id="chatContainer" style="display: none;">
+        <h2 id="chatTitle"></h2>
+        <iframe class="chat-iframe" id="chatFrame"></iframe>
+        <p>Share your UPI ID in the chat to split payments!</p>
+        <button onclick="closeChat()">Close Chat</button>
+    </div>
+
+    <script>
+        // Discord Chat Embed URLs (Replace with YOUR links)
+        const discordChannels = {
+            'pizza-hut': 'https://discord.com/widget?id=YOUR_PIZZA_HUT_CHANNEL_ID&theme=dark',
+            'dominos': 'https://discord.com/widget?id=YOUR_DOMINOS_CHANNEL_ID&theme=dark',
+            'burger-king': 'https://discord.com/widget?id=YOUR_BURGER_KING_CHANNEL_ID&theme=dark',
+            'mcdonalds': 'https://discord.com/widget?id=YOUR_MCDONALDS_CHANNEL_ID&theme=dark'
+        };
+
+        function openChat(restaurant) {
+            document.getElementById('chatContainer').style.display = 'block';
+            document.getElementById('chatTitle').textContent = `${restaurant.replace('-', ' ').toUpperCase()} Chat`;
+            document.getElementById('chatFrame').src = discordChannels[restaurant];
+        }
+
+        function closeChat() {
+            document.getElementById('chatContainer').style.display = 'none';
+            document.getElementById('chatFrame').src = '';
+        }
+    </script>
+</body>
+</html>
