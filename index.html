@@ -1,83 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Group Food Order</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Delivery Collaboration</title>
+    <!-- Same professional CSS as before -->
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            text-align: center;
-        }
-        .restaurant-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .restaurant-btn {
-            padding: 20px;
-            background: #f0f0f0;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-        .restaurant-btn:hover {
-            background: #e0e0e0;
-        }
-        .chat-iframe {
-            width: 100%;
-            height: 600px;
-            border: none;
-            margin-top: 20px;
-        }
+        /* [Keep the previous CSS styles here] */
     </style>
 </head>
 <body>
-    <h1>Choose a Restaurant</h1>
-    
-    <!-- Restaurant Buttons -->
-    <div class="restaurant-grid">
-        <button class="restaurant-btn" onclick="openChat('pizza-hut')">
-            🍕 Pizza Hut
-        </button>
-        <button class="restaurant-btn" onclick="openChat('dominos')">
-            🍕 Domino's
-        </button>
-        <button class="restaurant-btn" onclick="openChat('burger-king')">
-            🍔 Burger King
-        </button>
-        <button class="restaurant-btn" onclick="openChat('mcdonalds')">
-            🍟 McDonald's
-        </button>
+    <nav class="navbar">
+        <h1>FoodCollab</h1>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="about.html">About</a>
+            <a href="team.html">Team</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>Choose Your Restaurant</h2>
+        <div class="login-section">
+            <a href="login.html" class="login-btn">Login/Signup</a>
+        </div>
+        
+        <!-- Restaurant Buttons with Discord Channel IDs -->
+        <div id="restaurant-list">
+            <button onclick="selectRestaurant('pizza-hut')">🍕 Pizza Hut</button>
+            <button onclick="selectRestaurant('dominos')">🍕 Domino's</button>
+            <button onclick="selectRestaurant('burger-king')">🍔 Burger King</button>
+            <button onclick="selectRestaurant('mcdonalds')">🍟 McDonald's</button>
+        </div>
     </div>
 
-    <!-- Chat Container (hidden by default) -->
-    <div id="chatContainer" style="display: none;">
-        <h2 id="chatTitle"></h2>
-        <iframe class="chat-iframe" id="chatFrame"></iframe>
-        <p>Share your UPI ID in the chat to split payments!</p>
-        <button onclick="closeChat()">Close Chat</button>
-    </div>
+    <footer>
+        <p>&copy; 2023 FoodCollab. All rights reserved.</p>
+    </footer>
 
     <script>
-        // Discord Chat Embed URLs (Replace with YOUR links)
-        const discordChannels = {
-            'pizza-hut': 'https://discord.com/widget?id=1341363585447890966&theme=dark',
-            'dominos': 'https://discord.com/widget?id=1341366539420569670&theme=dark',
-            'burger-king': 'https://discord.com/widget?id=1341366708912259143&theme=dark',
-            'mcdonalds': 'https://discord.com/widget?id=1341366906321502228&theme=dark'
-        };
-
-        function openChat(restaurant) {
-            document.getElementById('chatContainer').style.display = 'block';
-            document.getElementById('chatTitle').textContent = `${restaurant.replace('-', ' ').toUpperCase()} Chat`;
-            document.getElementById('chatFrame').src = discordChannels[restaurant];
-        }
-
-        function closeChat() {
-            document.getElementById('chatContainer').style.display = 'none';
-            document.getElementById('chatFrame').src = '';
+        // Pass restaurant name to chat.html via URL
+        function selectRestaurant(restaurantKey) {
+            window.location.href = `chat.html?restaurant=${restaurantKey}`;
         }
     </script>
 </body>
