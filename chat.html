@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Chat</title>
+    <style>
+        /* Professional CSS for Chat Page */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background: #f0f2f5;
+        }
+        .navbar {
+            background: #2c3e50;
+            padding: 1rem 2rem;
+            color: white;
+        }
+        .chat-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        #discord-iframe {
+            width: 100%;
+            height: 70vh;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .back-btn {
+            background: #3498db;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <h1>FoodCollab Chat</h1>
+    </nav>
+
+    <div class="chat-container">
+        <button class="back-btn" onclick="window.history.back()">← Back to Restaurants</button>
+        <iframe 
+            id="discord-iframe"
+            allowtransparency="true" 
+            frameborder="0"
+        ></iframe>
+        <p>💡 Share your UPI ID in the chat to split payments!</p>
+    </div>
+
+    <script>
+        // Discord Channel IDs (Replace with YOURS)
+        const discordChannels = {
+            'pizza-hut': 'https://discord.com/widget?id=1341359913997172739&channel_id=1341363585447890966&theme=dark',
+            'dominos': 'https://discord.com/widget?id=1341359913997172739&channel_id=1341366539420569670&theme=dark',
+            'burger-king': 'https://discord.com/widget?id=1341359913997172739&channel_id=1341366708912259143&theme=dark',
+            'mcdonalds': 'https://discord.com/widget?id=1341359913997172739&channel_id=1341366906321502228&theme=dark'
+        };
+
+        // Get restaurant from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const restaurantKey = urlParams.get('restaurant');
+
+        // Load Discord widget
+        if (restaurantKey && discordChannels[restaurantKey]) {
+            document.getElementById('discord-iframe').src = discordChannels[restaurantKey];
+        } else {
+            window.location.href = 'index.html'; // Redirect if invalid
+        }
+    </script>
+</body>
+</html>
